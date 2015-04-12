@@ -37,7 +37,7 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'pg'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn', group: :production
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

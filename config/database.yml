@@ -1,0 +1,17 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: swispon
+  pool: 30
+  host: 127.0.0.1
+  username: dangnguyen
+  password:
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: vinyo_wdb_dev
+  pool: 30
+  host: 127.0.0.1
+  username: vinyo
+  password:

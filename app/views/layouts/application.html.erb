@@ -39,8 +39,8 @@
                 Reports <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
-                <li><a href="#finished">Finished</a></li>
-                <li><a href="#unfinished">Not Finished</a></li>
+                <li><%= link_to "Finished", reports_path(status: "finished") %></li>
+                <li><%= link_to "Not Finished", reports_path(status: "unfinished") %></li>
               </ul>
             </li>
             <li><%= link_to "Settings", edit_doctor_path(current_doctor) %></li>

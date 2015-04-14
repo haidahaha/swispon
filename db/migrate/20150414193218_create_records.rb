@@ -1,8 +1,8 @@
 class CreateRecords < ActiveRecord::Migration
   def change
     create_table :records do |t|
-      t.string :type
-      t.int :length
+      t.string :rtype
+      t.string :length
       t.boolean :transcribed
       t.references :report, index: true
       t.text :note

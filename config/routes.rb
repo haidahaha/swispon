@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  delete 'photos/:id/destroy' => 'photos#destroy', as: :destroy_photo
-  delete 'doctors/:id/destroy_photos' => 'doctors#destroy_photos', as: :destroy_photos
 
   root 'sessions#new'
   get 'about' => 'static_pages#about'
@@ -8,8 +6,13 @@ Rails.application.routes.draw do
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
-  patch 'doctors/:id/upload_photos' => 'doctors#upload_photos', as: :upload_photos
-  patch 'doctorcs/:id/create_note' => 'doctors#create_note', as: :create_note
+  get 'reports' => 'reports#index'
+  get 'reports/:id' => 'reports#show', as: :report
+  patch 'reports/:id/upload_photos' => 'reports#upload_photos', as: :upload_photos
+  delete 'reports/:id/destroy_photos' => 'reports#destroy_photos', as: :destroy_photos
+  delete 'photos/:id/destroy' => 'photos#destroy', as: :destroy_photo
+  get 'records/:id' => 'records#show', as: :record
+  patch 'records/:id/create_note' => 'records#create_note', as: :create_note
 
   resources :doctors
 end

@@ -11,23 +11,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150410090109) do
+ActiveRecord::Schema.define(version: 20150414193218) do
 
   create_table "doctors", force: true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "photo"
     t.string   "password_digest"
     t.string   "email"
-    t.text     "note"
+    t.string   "photo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "photos", force: true do |t|
-    t.integer  "doctor_id"
+    t.integer  "report_id"
     t.string   "photo"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "records", force: true do |t|
+    t.string   "rtype"
+    t.string   "length"
+    t.boolean  "transcribed"
+    t.integer  "report_id"
+    t.text     "note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "records", ["report_id"], name: "index_records_on_report_id"
+
+  create_table "reports", force: true do |t|
+    t.integer  "doctor_id"
+    t.string   "patientID"
+    t.string   "rtype"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "reports", ["doctor_id"], name: "index_reports_on_doctor_id"
 
 end

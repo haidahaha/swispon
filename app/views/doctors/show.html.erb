@@ -3,7 +3,7 @@
 
         <!-- ===== vCard Navigation ===== -->
         <div class="row w">
-            <div class="col-md-4" id="avatar">
+            <div class="col-md-4 top-buffer" id="avatar">
                 <% if @doctor.photo %>
                     <%= image_tag @doctor.photo_url.to_s, class: "img-responsive" %>
                 <% end %>
@@ -17,11 +17,9 @@
 
                   <!-- ===== First Tab ===== -->
                   <div class="tab-pane active" id="about">
-                    <h3>Dr. <%= @doctor.name %></h3>
-                    <h5>Web Designer</h5>
+                    <h3>Private Practice Dr. <%= @doctor.name %></h3>
                     <hr>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                    <p>Has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it.</p>
+                    <h1>Welcome back!</h1>
                   </div><!-- tab about -->
 
 

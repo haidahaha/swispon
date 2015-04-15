@@ -43,9 +43,10 @@ class DoctorsController < ApplicationController
   # PATCH/PUT /doctors/1
   # PATCH/PUT /doctors/1.json
   def update
+    @doctor = Doctor.find(params[:id])
     respond_to do |format|
       if @doctor.update(doctor_params)
-        format.html { redirect_to @doctor, notice: 'Doctor was successfully updated.' }
+        format.html { redirect_to @doctor, notice: 'Your information was successfully updated.' }
         format.json { render :show, status: :ok, location: @doctor }
       else
         format.html { render :edit }
@@ -76,6 +77,6 @@ class DoctorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def doctor_params
-      params.require(:doctor).permit(:name, :email, :password, :password_confirmation, :note, :photos_attributes => [:id, :doctor_id, :photo])
+      params.require(:doctor).permit(:name, :email, :password, :password_confirmation, :photo)
     end
 end

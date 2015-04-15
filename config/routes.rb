@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'reports/:id' => 'reports#show', as: :report
   patch 'reports/:id/upload_photos' => 'reports#upload_photos', as: :upload_photos
   delete 'reports/:id/destroy_photos' => 'reports#destroy_photos', as: :destroy_photos
+  get 'reports/:id/download' => 'reports#download', as: :download_report
   delete 'photos/:id/destroy' => 'photos#destroy', as: :destroy_photo
   get 'records/:id' => 'records#show', as: :record
   patch 'records/:id/create_note' => 'records#create_note', as: :create_note

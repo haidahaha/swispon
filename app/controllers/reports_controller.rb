@@ -10,6 +10,11 @@ class ReportsController < ApplicationController
         @records = @report.records
     end
 
+    def download
+        report_name = Report.find(params[:id]).patientID.to_s
+        send_file "public/reports/#{report_name}.pdf", type: "application/pdf", status: 200
+    end
+
     def upload_photos
       @report = Report.find(params[:id])
       respond_to do |format|

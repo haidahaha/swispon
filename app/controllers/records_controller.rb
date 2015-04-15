@@ -3,6 +3,10 @@ class RecordsController < ApplicationController
     @record = Record.find(params[:id])
   end
 
+  def note
+    @record = Record.find(params[:id])
+  end
+
   def create_note
     @record = Record.find(params[:id])
     respond_to do |format|

@@ -1,7 +1,7 @@
 class ReportsController < ApplicationController
     def index
-        @reports = Report.where(status: params[:status])
-        @status = params[:status]
+        @status = params[:status] || "finished"
+        @reports = Report.where(status: @status)
     end
 
     def show
@@ -13,6 +13,21 @@ class ReportsController < ApplicationController
     def download
         report_name = Report.find(params[:id]).patientID.to_s
         send_file "public/reports/#{report_name}.pdf", type: "application/pdf", status: 200
+    end
+
+    def submit
+        report = Report.find(params[:id])
+        report.status = "finished"
+        respond_to do |format|
+          if report.save
+            format.html { redirect_to action: :index, notice: 'Report was successfully submitted.' }
+            format.json { render :show, status: :created, location: report }
+          else
+            format.html { render :new }
+            format.json { render json: report.errors, status: :unprocessable_entity }
+          end
+        end
+
     end
 
     def upload_photos

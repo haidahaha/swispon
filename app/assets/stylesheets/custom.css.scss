@@ -149,3 +149,12 @@ span.glyphicon {
 .white-background {
   background-color: #ffffff;
 }
+
+.secret > a {
+  color: #222 !important;
+}
+
+.secret > a:hover,
+.secret > a:focus {
+    color: red !important;
+}

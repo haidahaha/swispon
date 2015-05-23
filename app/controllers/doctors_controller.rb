@@ -11,6 +11,7 @@ class DoctorsController < ApplicationController
   # GET /doctors/1.json
   def show
     @doctor = Doctor.find(params[:id])
+    @reports = Report.unfinished
   end
 
   # GET /doctors/new

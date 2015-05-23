@@ -8,15 +8,13 @@
             </h3>
             <div class="row top-buffer">
                 <div class="col-md-4 col-md-offset-2">
-                    <%= form_for @report, url: upload_photos_path, html: {:multipart => true, class: "input-group"} do |f| %>
-                        <%= f.file_field :photos, :multiple => true, name: "photos[photo][]", class: "form-control" %>
-                        <span class="input-group-btn">
-                            <%= f.submit "Upload photos", class: "btn btn-primary" %>
-                        </span>
+<!--                     <%= form_for @report, url: upload_photos_path, html: {class: "dropzone"} do |f| %>
+                        <%= f.file_field :photos, :multiple => true, name: "photos[photo][]"%>
+                    <% end %> -->
+                    <%= form_for @report, url: upload_photos_path do |f| %>
+                        <%= f.file_field :photos, :multiple => true, name: "photos[photo][]"%>
+                        <%= f.submit "Upload", class: "btn btn-success" %>
                     <% end %>
-                </div>
-                <div class="col-md-2">
-                    <%= button_to "Delete All Photos", destroy_photos_path(@report), method: :delete, class: "btn btn-danger", data: {confirm: "Are you sure?"} %>
                 </div>
             </div>
             <div class="row top-buffer">
@@ -54,7 +52,7 @@
               <tbody>
                   <% @records.each do |record| %>
                     <tr>
-                      <td><%= record.rtype %></td>
+                      <td data-toggle="collapse" href="#collapseExample_<%= record.id %>" aria-expanded="false" aria-controls="collapseExample"><%= record.rtype %></td>
                       <td><%= record.length %></td>
                       <td>
                         <% if record.transcribed %>
@@ -78,11 +76,19 @@
                         <% end %>
                       </td>
                     </tr>
+                    <tr class="collapse out" id="collapseExample_<%= record.id %>">
+                      <td>
+                        <div class="well">
+                          <%= record.note || "..." %>
+                        </div>
+                      </td>
+                    </tr>
                   <% end %>
               </tbody>
             </table>
           </div>
         </div>
+
         <div class="row clearfix">
           <div class="col-md-4 col-md-offset-4 column">
             <%= button_to "Submit Report", submit_report_path(@report), method: :patch, class: "btn btn-success" %>

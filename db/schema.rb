@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150414193218) do
+ActiveRecord::Schema.define(version: 20150518213749) do
 
   create_table "doctors", force: true do |t|
     t.string   "name"
@@ -37,13 +37,14 @@ ActiveRecord::Schema.define(version: 20150414193218) do
     t.text     "note"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "file"
   end
 
   add_index "records", ["report_id"], name: "index_records_on_report_id"
 
   create_table "reports", force: true do |t|
     t.integer  "doctor_id"
-    t.string   "patientID"
+    t.string   "patient"
     t.string   "rtype"
     t.string   "status"
     t.datetime "created_at"

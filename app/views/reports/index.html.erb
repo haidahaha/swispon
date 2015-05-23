@@ -18,7 +18,7 @@
             <% @reports.each do |report| %>
               <tr>
                 <td><%= report.id %></td>
-                <td><%= report.patientID %></td>
+                <td><%= report.patient %></td>
                 <td><%= report.rtype %></td>
                 <td><%= report.created_at.strftime("%B %d %I:%M %p") %></td>
                 <td><%= report.updated_at.strftime("%B %d %I:%M %p") %></td>

@@ -1,7 +1,7 @@
 class ReportsController < ApplicationController
     def index
         @status = params[:status] || "finished"
-        @reports = Report.where(status: @status)
+        @reports = Report.finished
     end
 
     def show
@@ -11,7 +11,7 @@ class ReportsController < ApplicationController
     end
 
     def download
-        report_name = Report.find(params[:id]).patientID.to_s
+        report_name = Report.find(params[:id]).patient.to_s
         send_file "public/reports/#{report_name}.pdf", type: "application/pdf", status: 200
     end
 
@@ -38,15 +38,6 @@ class ReportsController < ApplicationController
           end
           format.html { redirect_to @report, notice: 'Photos were successfully uploaded.' }
           format.json { render :show, status: :ok, location: @report }
-      end
-    end
-
-    def destroy_photos
-      @report = Report.find(params[:id])
-      @report.photos.destroy_all
-      respond_to do |format|
-        format.html { redirect_to @report, notice: 'All photos were successfully deleted.' }
-        format.json { head :no_content }
       end
     end
 end

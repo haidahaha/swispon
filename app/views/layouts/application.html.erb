@@ -34,12 +34,12 @@
           <li><%= link_to "Home", current_doctor %></li>
           <% if logged_in? %>
             <li><%= link_to "Finished Reports", reports_path(status: "finished") %></li>
-            <li><%= link_to "Settings", edit_doctor_path(current_doctor) %></li>            
+            <li><%= link_to "Settings", edit_doctor_path(current_doctor) %></li>
             <li><%= link_to "Log out", logout_path, method: "delete" %></li>
           <% else %>
             <li><%= link_to "Log in", login_path %></li>
           <% end %>
-          <li><a href="support">Support</a></li>
+          <li><a href="#">Support</a></li>
           <li class="secret"><%= link_to "Reset", reset_path %></li>
         </ul>
       </div>

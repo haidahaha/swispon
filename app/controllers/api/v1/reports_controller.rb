@@ -5,8 +5,11 @@ class Api::V1::ReportsController < Api::V1::BaseController
     end
 
     def indexUnfinished
-        reports = Report.unfinished || []
-        render json: reports, each_serializer: ReportUnfinishedSerializer
+        reports = Report.unfinished
+        if reports
+            render json: reports, each_serializer: ReportUnfinishedSerializer
+        else
+            render json: reports
     end
 
     def create

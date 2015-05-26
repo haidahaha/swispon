@@ -10,6 +10,7 @@ class Api::V1::ReportsController < Api::V1::BaseController
             render json: reports, each_serializer: ReportUnfinishedSerializer
         else
             render json: reports
+        end
     end
 
     def create

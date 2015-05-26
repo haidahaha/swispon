@@ -6,11 +6,8 @@ class Api::V1::ReportsController < Api::V1::BaseController
 
     def indexUnfinished
         reports = Report.unfinished
-        if reports
-            render json: reports, each_serializer: Api::V1::ReportUnfinishedSerializer
-        else
-            render json: reports
-        end
+        # render json: reports, each_serializer: ReportUnfinishedSerializer
+        render json: reports
     end
 
     def create

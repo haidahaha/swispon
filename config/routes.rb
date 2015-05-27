@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   delete 'logout' => 'sessions#destroy'
   get 'reports' => 'reports#index'
   get 'reports/:id' => 'reports#show', as: :report
+  get 'reports/:id/refresh_thumbnail' => 'reports#refresh_thumbnail', as: :refresh
   patch 'reports/:id/upload_photos' => 'reports#upload_photos', as: :upload_photos
   patch 'reports/:id/submit' => 'reports#submit', as: :submit_report
   get 'reports/:id/download' => 'reports#download', as: :download_report

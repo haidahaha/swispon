@@ -1,0 +1,12 @@
+<% if photos %>
+  <% photos.each do |photo| %>
+    <div class="col-md-4">
+      <div class="thumbnail">
+        <%= image_tag photo.photo_url.to_s %>
+        <div class="caption text-center">
+          <%= link_to "Delete Photo", destroy_photo_path(photo), method: :delete, data: {confirm: "Are you sure?"} %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

@@ -33,11 +33,14 @@ class ReportsController < ApplicationController
     def upload_photos
       @report = Report.find(params[:id])
       respond_to do |format|
-          params[:photos]['photo'].each do |p|
-            @photos = @report.photos.create!(:photo => p, :report_id => @report.id)
-          end
+          @photo = @report.photos.create!(:photo => params[:photo], :report_id => @report.id)
           format.html { redirect_to @report, notice: 'Photos were successfully uploaded.' }
-          format.json { render :show, status: :ok, location: @report }
+          format.json { render json: @photo }
       end
+    end
+
+    def refresh_thumbnail
+      @report = Report.find(params[:id])
+      @photos = @report.photos
     end
 end

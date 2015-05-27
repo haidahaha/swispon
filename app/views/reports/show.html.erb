@@ -7,29 +7,14 @@
               Photos
             </h3>
             <div class="row top-buffer">
-                <div class="col-md-4 col-md-offset-2">
-<!--                     <%= form_for @report, url: upload_photos_path, html: {class: "dropzone"} do |f| %>
-                        <%= f.file_field :photos, :multiple => true, name: "photos[photo][]"%>
-                    <% end %> -->
-                    <%= form_for @report, url: upload_photos_path do |f| %>
-                        <%= f.file_field :photos, :multiple => true, name: "photos[photo][]"%>
-                        <%= f.submit "Upload", class: "btn btn-success" %>
+                <div class="col-md-8 col-md-offset-2">
+                    <%= form_for @report, url: upload_photos_path, html: {class: "dropzone", id: "media-dropzone"} do |f| %>
+
                     <% end %>
                 </div>
             </div>
-            <div class="row top-buffer">
-              <% if @photos %>
-                <% @photos.each do |photo| %>
-                  <div class="col-md-4">
-                    <div class="thumbnail">
-                      <%= image_tag photo.photo_url.to_s %>
-                      <div class="caption text-center">
-                        <%= link_to "Delete Photo", destroy_photo_path(photo), method: :delete, data: {confirm: "Are you sure?"} %>
-                      </div>
-                    </div>
-                  </div>
-                <% end %>
-              <% end %>
+            <div class="row top-buffer" id="thumbnails">
+                  <%= render partial: 'thumbnail', locals: {photos: @photos} %>
             </div>
           </div>
         </div>
@@ -98,3 +83,19 @@
       </div>
     </div>
 </div>
+
+<script type="text/javascript">
+  $(function() {
+    Dropzone.options.mediaDropzone = {
+      paramName: "photo",
+      init: function () {
+        this.on("queuecomplete", function (file) {
+          $.get("/reports/<%= @report.id %>/refresh_thumbnail.js", function(data) {
+                $("#thumbnails").html(data);
+              },
+              "html");
+        });
+      }
+    };
+  });
+</script>

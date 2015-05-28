@@ -1,20 +1,21 @@
-worker_processes Integer(ENV["WEB_CONCURRENCY"] || 3)
-timeout 15
+worker_processes 2
+timeout 30
 preload_app true
 
-# Set the working application directory
-# working_directory "/path/to/your/app"
-working_directory "/home/ubuntu/rails"
+# set path to application
+app_dir = File.expand_path("../..", __FILE__)
+shared_dir = "#{app_dir}/shared"
+working_directory app_dir
 
-# Unicorn PID file location
-# pid "/path/to/pids/unicorn.pid"
-pid "/home/ubuntu/rails/pids/unicorn.pid"
+# Set up socket location
+listen "#{shared_dir}/sockets/unicorn.sock", :backlog => 64
 
-# Path to logs
-# stderr_path "/path/to/log/unicorn.log"
-# stdout_path "/path/to/log/unicorn.log"
-stderr_path "/home/ubuntu/rails/log/unicorn.log"
-stdout_path "/home/ubuntu/rails/log/unicorn.log"
+# Logging
+stderr_path "#{shared_dir}/log/unicorn.stderr.log"
+stdout_path "#{shared_dir}/log/unicorn.stdout.log"
+
+# Set master PID location
+pid "#{shared_dir}/pids/unicorn.pid"
 
 before_fork do |server, worker|
   Signal.trap 'TERM' do

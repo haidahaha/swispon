@@ -1,6 +1,5 @@
 class ReportsController < ApplicationController
     def index
-        @status = params[:status] || "finished"
         @reports = Report.finished
     end
 
@@ -12,7 +11,7 @@ class ReportsController < ApplicationController
 
     def download
         report_name = Report.find(params[:id]).patient.to_s
-        send_file "public/reports/#{report_name}.pdf", type: "application/pdf", status: 200
+        send_file "public/reports/003.pdf", type: "application/pdf", status: 200
     end
 
     def submit

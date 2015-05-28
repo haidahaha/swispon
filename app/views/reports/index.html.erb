@@ -2,7 +2,7 @@
   <div class="row clearfix">
       <div class="col-md-12 column top-buffer white-background">
         <h3 class="text-center">
-          <% if @status == "finished" %> Finished Reported <% else %> Unfinished Reports <% end %>
+          Finished Reported
         </h3>
         <table class="table table-hover">
           <thead>
@@ -11,7 +11,8 @@
               <th>Patient</th>
               <th>Report type</th>
               <th>Created at</th>
-              <% if @status == "finished" %> <th>Submitted at</th><th>Download</th> <% else %> <th>Updated at</th><th>Show</th> <% end %>
+              <th>Submitted at</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -22,11 +23,34 @@
                 <td><%= report.rtype %></td>
                 <td><%= report.created_at.strftime("%B %d %I:%M %p") %></td>
                 <td><%= report.updated_at.strftime("%B %d %I:%M %p") %></td>
-                <% if @status == "finished" %> <td><%= link_to download_report_path(report) do %> <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span> <% end %></td> <% else %> <td><%= link_to report do %> <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> <% end %> <% end %> </td>
+                <td>
+                  <%= link_to "#", class: "pdfpreview" do %>
+                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                  <% end %>
+                  <%= link_to download_report_path(report) do %>
+                    <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>
+                  <% end %>
+                </td>
               </tr>
             <% end %>
           </tbody>
         </table>
       </div>
     </div>
+    <div id="dialog" style="display:none">
+      <div>
+        <iframe src="reports/003.pdf" width="100%" height="600" style="border: none;"> </iframe>
+      </div>
+    </div>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.pdfpreview').click(function(){
+      $("#dialog").dialog({
+        modal: true,
+        width: 800
+      });
+    });
+  });
+</script>

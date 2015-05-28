@@ -8,8 +8,7 @@ shared_dir = "#{app_dir}/shared"
 working_directory app_dir
 
 # Set up socket location
-# listen "#{shared_dir}/sockets/unicorn.sock", :backlog => 64
-listen "127.0.0.1:8080"
+listen "#{shared_dir}/sockets/unicorn.sock", :backlog => 64
 
 # Logging
 stderr_path "#{shared_dir}/log/unicorn.stderr.log"
